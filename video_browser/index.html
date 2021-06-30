@@ -1,0 +1,39 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="browser_load()">
+	<div id="top_bar">
+		<span id="top_tabs">
+				<span class="top_button" id="browse_tab_btn" onclick="change_tab(this, 'browse_tab')">☰</span><span class="top_button" onclick="change_tab(this, 'ponyrelated_tab')">P</span><span class="top_button" onclick="change_tab(this, 'info_tab')">?</span>
+		</span>
+		<span id=top_space></span>
+		<a href="https://gitgud.io/Pyxia/" id="top_info">Archive browser by Pyxia<br>Version: 2021-06-30</a>
+	</div>
+
+	<span id="tabs">
+		<div class="tab" id="browse_tab">
+		</div>
+		<div class="tab" id="ponyrelated_tab">
+			<center><button onclick=copy_ponyrelated()>Copy to clipboard</button></center>
+		</div>
+		<div class="tab" id="info_tab">
+			<center><h1>Archiving unlisted videos</h1></center>
+			<h2>How to use it?</h2>
+			Use the first icon on the top left to browse videos. Press on the thumbnail to mark videos as pony related. Press on the title to go to watch the video or the uploaders name to go to the channel.<br>
+			Use the second icon on the top left to browse videos marked as pony related. It works almost the same as in the first tab but when you click on a video you unmark it and when you're done you can click on the copy to clipboard button to copy the links. If that button for whatever reason doesn't work then the videos are stored in the "ponyrelated" localstorage variable.
+		</div>
+	</span>
+
+	<noscript>
+		<div class="tab" id="noscript">
+			<center><h2>NoScript</h2></center>
+			This site doesn't work without javascript.
+		</div>
+	</noscript>
+
+	<script src="browser.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>
