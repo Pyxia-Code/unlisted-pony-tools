@@ -179,6 +179,8 @@ function Browser(browser_parent, content){
 		browser_ponyrelated.array_reload();
 		browser_main.view_page = old_main_page;
 		browser_ponyrelated.view_page = old_ponyrelated_page;
+		browser_main._view_reload();
+		browser_ponyrelated._view_reload();
 
 		localStorage.setItem("ponyrelated", JSON.stringify(ponyrelated_content));
 	}
