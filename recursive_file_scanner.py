@@ -18,8 +18,8 @@ def main():
 		with open(i, "r") as fl:
 			data = fl.read()
 			link_list += re.findall("v=([a-zA-Z0-9_-]{11})", data)
-			link_list += re.findall("youtu\.be([a-zA-Z0-9_-]{11})", data)
-			playlist_list += re.findall("\?list=([a-zA-Z0-9_-]{18,34})", data)
+			link_list += re.findall("youtu\.be/([a-zA-Z0-9_-]{11})", data)
+			playlist_list += re.findall("[&?]list=([a-zA-Z0-9_-]{18,34})", data)
 		#print(metadata)
 	link_list_dedupe = []
 	playlist_list_dedupe = []
