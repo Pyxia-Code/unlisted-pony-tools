@@ -14,7 +14,7 @@ optional arguments:
                         Files with ids to add
   --minus FILE [FILE ...]
                         Files with ids to remove
-  --no-comments         Files with ids to remove
+  --no-comments         Don't print comments
 ```
 
 # browser_history.py
@@ -42,9 +42,9 @@ Recursively find text files and scan them for youtube links
 optional arguments:
   -h, --help            show this help message and exit
   --in INPUT_DIR, -i INPUT_DIR
-                        This directory is recursively searched for *.info.json files (other files are omitted)
+                        This directory is recursively searched for text files
   --out OUTPUT_FL, -o OUTPUT_FL
-                        Output metadata file
+                        Output file
 ```
 
 # pony_rewatch_userscript.js

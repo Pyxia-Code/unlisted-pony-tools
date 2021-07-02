@@ -25,7 +25,7 @@ def main():
 	parser = argparse.ArgumentParser(description="Add/remove video ids and print them")
 	parser.add_argument("--plus", dest="add", nargs="+", metavar="FILE", help="Files with ids to add", required=False)
 	parser.add_argument("--minus", dest="remove", nargs="+", metavar="FILE", help="Files with ids to remove", required=False)
-	parser.add_argument("--no-comments", dest="nocomments", action="store_true", help="Files with ids to remove")
+	parser.add_argument("--no-comments", dest="nocomments", action="store_true", help="Don't print comments")
 	args = parser.parse_args()
 
 	blacklist = set()

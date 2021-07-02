@@ -7,8 +7,8 @@ import re
 
 def main():
 	parser = argparse.ArgumentParser(description="Recursively find text files and scan them for youtube links")
-	parser.add_argument("--in", "-i", dest="input_dir", help="This directory is recursively searched for *.info.json files (other files are omitted)", required=True)
-	parser.add_argument("--out", "-o", dest="output_fl", help="Output metadata file", required=True)
+	parser.add_argument("--in", "-i", dest="input_dir", help="This directory is recursively searched for text files", required=True)
+	parser.add_argument("--out", "-o", dest="output_fl", help="Output file", required=True)
 	args = parser.parse_args()
 
 	metadata = pony_rewatch.search_for_extension(args.input_dir, (".txt", ".phtml", ".html", ".htm", ".php", ".js", ".css", ".description"))
