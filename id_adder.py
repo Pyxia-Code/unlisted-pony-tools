@@ -28,30 +28,32 @@ def main():
 	parser.add_argument("--no-comments", dest="nocomments", action="store_true", help="Files with ids to remove")
 	args = parser.parse_args()
 
-	blacklist = []
-	output = []
+	blacklist = set()
+	output = set()
+	comments = {}
 
 	if args.remove:
 		for i in args.remove:
 			vids = get_ids(i)
 			for vid in vids:
-				blacklist.append(vid[0])
+				blacklist.add(vid[0])
 	
 	if args.add:
 		for i in args.add:
 			vids = get_ids(i)
 			for vid in vids:
-				if vid[0] not in blacklist:
-					output.append(vid)
-					blacklist.append(vid[0])
+				output.add(vid[0])
+				comments[vid[0]] = vid[1]
 	
+	output = output.difference(blacklist)
+
 	for i in output:
 		if(args.nocomments):
-			print("https://youtube.com/watch?v={}".format(i[0]))
+			print("https://youtube.com/watch?v={}".format(i))
 		else:
-			if(i[1] != ""):
-				print(i[1])
-			print("https://youtube.com/watch?v={}".format(i[0]))
+			if(comments[i] != ""):
+				print(comments[i])
+			print("https://youtube.com/watch?v={}".format(i))
 			print()
 
 if(__name__ == "__main__"):
