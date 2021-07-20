@@ -31,6 +31,22 @@ def main():
 				playlists.add(playlist)
 			#TODO: search for channels
 	
+	#Scan metadata files
+	to_scan = pony_rewatch.search_for_extension(args.input_dir, ".info.json")
+	for i in to_scan:
+		with open(i, "r") as fl:
+			try:
+				fl_json = json.loads(fl.read())
+				if fl_json.get("comments"):
+					for comment in fl_json["comments"]:
+						channel_ids.add(comment["author_id"])
+				if fl_json.get("channel_id"):
+					channel_ids.add(fl_json["channel_id"])
+				if fl_json.get("id"):
+					vids.add(fl_json["id"])
+			except Exception:
+				pass
+
 	with open(args.output_fl, "w") as fl:
 		for i in vids:
 			fl.write("https://youtube.com/watch?v=")
