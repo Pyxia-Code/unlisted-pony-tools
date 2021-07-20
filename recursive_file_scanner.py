@@ -11,31 +11,37 @@ def main():
 	parser.add_argument("--out", "-o", dest="output_fl", help="Output file", required=True)
 	args = parser.parse_args()
 
-	metadata = pony_rewatch.search_for_extension(args.input_dir, (".txt", ".phtml", ".html", ".htm", ".php", ".js", ".css", ".description", ".json", ".xml"))
-	link_list = []
-	playlist_list = []
-	for i in metadata:
+
+	vids = set()
+	playlists = set()
+	channel_ids = set()
+
+	#Scan text files
+	to_scan = pony_rewatch.search_for_extension(args.input_dir, (".txt", ".phtml", ".html", ".htm", ".php", ".js", ".css", ".description", ".json", ".xml"))
+	for i in to_scan:
 		with open(i, "r") as fl:
 			data = fl.read()
-			link_list += re.findall("v=([a-zA-Z0-9_-]{11})", data)
-			link_list += re.findall("youtu\.be/([a-zA-Z0-9_-]{11})", data)
-			playlist_list += re.findall("[&?]list=([a-zA-Z0-9_-]{18,34})", data)
-		#print(metadata)
-	link_list_dedupe = []
-	playlist_list_dedupe = []
+			for vid in re.findall("v=([a-zA-Z0-9_-]{11})", data):
+				vids.add(vid)
+			for vid in re.findall("youtu\.be/([a-zA-Z0-9_-]{11})", data):
+				vids.add(vid)
+			for playlist in re.findall("[&?]list=([a-zA-Z0-9_-]{18,34})", data):
+				playlists.add(playlist)
+			#TODO: search for channels
+	
 	with open(args.output_fl, "w") as fl:
-		for i in link_list:
-			if not i in link_list_dedupe:
-				link_list_dedupe.append(i)
-				fl.write("https://youtube.com/watch?v=")
-				fl.write(i)
-				fl.write("\n")
-		for i in playlist_list:
-			if not i in playlist_list_dedupe:
-				playlist_list_dedupe.append(i)
-				fl.write("https://youtube.com/playlist?list=")
-				fl.write(i)
-				fl.write("\n")
+		for i in vids:
+			fl.write("https://youtube.com/watch?v=")
+			fl.write(i)
+			fl.write("\n")
+		for i in playlists:
+			fl.write("https://youtube.com/playlist?list=")
+			fl.write(i)
+			fl.write("\n")
+		for i in channel_ids:
+			fl.write("https://youtube.com/channel/")
+			fl.write(i)
+			fl.write("\n")
 
 if(__name__ == "__main__"):
 	try:
