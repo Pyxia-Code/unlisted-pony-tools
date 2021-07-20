@@ -23,6 +23,8 @@ def main():
 			data = fl.read()
 			for vid in re.findall("v=([a-zA-Z0-9_-]{11})", data):
 				vids.add(vid)
+			for vid in re.findall("/v/([a-zA-Z0-9_-]{11})", data):
+				vids.add(vid)
 			for vid in re.findall("youtu\.be/([a-zA-Z0-9_-]{11})", data):
 				vids.add(vid)
 			for playlist in re.findall("[&?]list=([a-zA-Z0-9_-]{18,34})", data):
